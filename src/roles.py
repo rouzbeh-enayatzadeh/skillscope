@@ -12,8 +12,9 @@ ROLE_PATTERNS = [
 ]
 
 SENIORITY_PATTERNS = [
-    ("Intern", r"\bintern"),
-    ("Lead/Principal", r"\blead\b|\bprincipal\b|\bstaff\b|\bhead of\b|\bdirector\b|\bmanager\b"),
+    ("Intern", r"\bintern\b|\binterns\b|\binternship"),
+    ("Lead/Principal", r"\blead\b|\bprincipal\b|\bstaff (?:\w+ )?(?:engineer|scientist)\b|"
+                       r"\bhead of\b|\bdirector\b|\bmanager\b"),
     ("Senior", r"\bsenior\b|\bsr\b|\biii\b|\biv\b"),
     ("Junior", r"\bjunior\b|\bjr\b|\bentry\b"),
 ]
