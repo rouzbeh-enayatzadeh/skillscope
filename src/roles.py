@@ -1,8 +1,11 @@
 import re
 
+AI_TERMS = r"(?:\bai\b|artificial intelligence|\bgen ?ai\b|generative ai)"
+TECH_TERMS = r"\b(?:engineer|developer|scientist|architect|research)"
+
 ROLE_PATTERNS = [
-    ("ML/AI Engineer", r"machine learning|\bml\b|\bai\b|artificial intelligence|deep learning|"
-                       r"\bnlp\b|computer vision|\bllm\b|mlops"),
+    ("ML/AI Engineer", r"machine learning|\bml\b|deep learning|\bnlp\b|computer vision|\bllm\b|mlops|"
+                       rf"{AI_TERMS}.*{TECH_TERMS}|{TECH_TERMS}.*{AI_TERMS}"),
     ("Data Scientist", r"scien"),
     ("BI Analyst", r"business intelligence|\bbi\b|power bi|tableau"),
     ("Data Engineer", r"engineer|architect|\betl\b|warehouse|modeler|developer"),
