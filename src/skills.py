@@ -54,7 +54,8 @@ SKILLS = {
     "informatica":   ("data_engineering", [r"\binformatica\b"]),
     "data modeling": ("data_engineering", [r"\bdata model(?:l)?ing\b"]),
     # BI and analytics
-    "excel":         ("bi", [r"(?-i:\bExcel\b)", r"\b(?:ms|microsoft) excel\b"]),
+    "excel":         ("bi", [r"(?<!\bto )(?<!\byou )(?<!\bwill )(?<!\bwho )(?<!\bthey )(?<!\bwe )"
+                             r"\bexcel\b(?!\s+(?:at|in|within)\b)"]),
     "power bi":      ("bi", [r"\bpower ?bi\b"]),
     "tableau":       ("bi", [r"\btableau\b"]),
     "looker":        ("bi", [r"\blooker\b"]),
