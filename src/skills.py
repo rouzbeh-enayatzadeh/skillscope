@@ -118,3 +118,43 @@ def extract_skills(text: str) -> set:
     if not isinstance(text, str):
         return set()
     return {name for name, rx in _COMPILED.items() if rx.search(text)}
+
+
+# A specific skill implies a broader one (e.g. xgboost → machine learning).
+# Used for CV matching only; extract_skills itself stays unchanged.
+IMPLIES = {
+    "scikit-learn": {"machine learning"},
+    "xgboost": {"machine learning"},
+    "lightgbm": {"machine learning"},
+    "deep learning": {"machine learning"},
+    "nlp": {"machine learning"},
+    "computer vision": {"machine learning"},
+    "tensorflow": {"deep learning"},
+    "pytorch": {"deep learning"},
+    "keras": {"deep learning"},
+    "tableau": {"data visualization"},
+    "power bi": {"data visualization"},
+    "looker": {"data visualization"},
+    "qlik": {"data visualization"},
+    "llm": {"generative ai"},
+    "langchain": {"llm"},
+    "llamaindex": {"llm"},
+    "rag": {"llm"},
+    "pyspark": {"spark"},
+    "dbt": {"etl"},
+    "airflow": {"etl"},
+    "ssis": {"etl"},
+    "informatica": {"etl"},
+}
+
+
+def expand_skills(skills: set) -> set:
+    """Add broader skills implied by specific ones, transitively (pytorch → deep learning → machine learning)."""
+    expanded = set(skills)
+    frontier = list(skills)
+    while frontier:
+        for implied in IMPLIES.get(frontier.pop(), ()):
+            if implied not in expanded:
+                expanded.add(implied)
+                frontier.append(implied)
+    return expanded
